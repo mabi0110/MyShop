@@ -10,6 +10,8 @@ header {
     background-color: black;
     color: white;
     padding: 5px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .title {
@@ -68,4 +70,13 @@ header {
 
 .add-button:hover {
     background-color: #2f2f2f;
+}
+
+.cart-ico {
+    text-decoration: none;
+    color: white;
+}
+
+.cart-ico:hover {
+    color: brown;
 }
