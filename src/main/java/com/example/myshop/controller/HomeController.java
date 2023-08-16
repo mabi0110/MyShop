@@ -12,7 +12,6 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-
     static List<Item> items = new ArrayList<>();
 
     static {
@@ -20,13 +19,9 @@ public class HomeController {
         items.add(new Item("Pióro", new BigDecimal("12.6"), "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAatvszFV6LIDGoo_JIVXZRONRpzYDExm3uw&usqp=CAU"));
         items.add(new Item("Ołówek", new BigDecimal("1.5"), "https://iheartcraftythings.com/wp-content/uploads/2021/05/Pencil-DRAWING-%E2%80%93-STEP-10.jpg"));
     }
-
-
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("items", items);
         return "home";
     }
-
-
 }
