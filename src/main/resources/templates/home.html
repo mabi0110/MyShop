@@ -18,7 +18,7 @@
     </a>
 </header>
 <div class="main-content">
-    <div class="item">
+    <div class="item" th:each="item : ${items}">
         <p class="item-name" th:text="${item.name}"/>
 
         <img th:src="@{${item.imgUrl}}">

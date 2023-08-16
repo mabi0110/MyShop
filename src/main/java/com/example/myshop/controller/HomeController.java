@@ -7,47 +7,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Controller
 public class HomeController {
 
-//    @GetMapping("/")
-//    public String home() {
-//        return "home";
-//    }
+    private List<Item> items = List.of(
+            new Item("Długopis", new BigDecimal("3.8"), "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqagQWzJRwvotqcrZD5TZhk5eqE1QvPJ7dAYHiLXhrcWyeHiq-YA46S57PVnf5wR_-Bmg&usqp=CAU"),
+            new Item("Długopis", new BigDecimal("3.8"), "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqagQWzJRwvotqcrZD5TZhk5eqE1QvPJ7dAYHiLXhrcWyeHiq-YA46S57PVnf5wR_-Bmg&usqp=CAU"),
+            new Item("Pióro", new BigDecimal("12.6"), "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAatvszFV6LIDGoo_JIVXZRONRpzYDExm3uw&usqp=CAU"),
+            new Item("Ołówek", new BigDecimal("1.5"), "https://iheartcraftythings.com/wp-content/uploads/2021/05/Pencil-DRAWING-%E2%80%93-STEP-10.jpg"),
+            new Item("Ołówek", new BigDecimal("1.5"), "https://iheartcraftythings.com/wp-content/uploads/2021/05/Pencil-DRAWING-%E2%80%93-STEP-10.jpg"),
+            new Item("Ołówek", new BigDecimal("1.5"), "https://iheartcraftythings.com/wp-content/uploads/2021/05/Pencil-DRAWING-%E2%80%93-STEP-10.jpg")
+    );
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("item", new Item(
-                "Ołówek",
-                new BigDecimal("1.5"),
-                "https://iheartcraftythings.com/wp-content/uploads/2021/05/Pencil-DRAWING-%E2%80%93-STEP-10.jpg"));
+        model.addAttribute("items", items);
         return "home";
     }
 
-    @GetMapping("/pencil")
-    @ResponseBody
-    public Item pencil() {
-        return new Item(
-                "Ołówek",
-                new BigDecimal("1.5"),
-                "https://iheartcraftythings.com/wp-content/uploads/2021/05/Pencil-DRAWING-%E2%80%93-STEP-10.jpg"
-        );
-    }
-
-    @GetMapping("/addItem")
-    public String addItem() {
-        return "addItem";
-    }
-
-    @GetMapping("/summary")
-    public String summary() {
-        return "summary";
-    }
-
-    @GetMapping("/cartView")
-    public String cartView() {
-        return "cartView";
-    }
 
 }
