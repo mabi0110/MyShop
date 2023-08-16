@@ -2,6 +2,7 @@ package com.example.myshop.controller;
 
 import com.example.myshop.model.Item;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -10,8 +11,17 @@ import java.math.BigDecimal;
 @Controller
 public class HomeController {
 
+//    @GetMapping("/")
+//    public String home() {
+//        return "home";
+//    }
+
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("item", new Item(
+                "Ołówek",
+                new BigDecimal("1.5"),
+                "https://iheartcraftythings.com/wp-content/uploads/2021/05/Pencil-DRAWING-%E2%80%93-STEP-10.jpg"));
         return "home";
     }
 
