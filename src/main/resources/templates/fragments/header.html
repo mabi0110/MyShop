@@ -8,14 +8,15 @@
 <body>
     <header th:fragment="shopHeader">
         <span class="title">MyShop</span>
-        <a href="" class="cart-ico">
+<!--        <a href="" class="cart-ico">-->
             <div>
-                <span>Koszyk</span>
+                <span>Koszyk (</span>
                 <span th:text="${@cart.counter}"></span>
+                <span> ) </span>
                 <span th:text="${@cart.sum}"></span>
                 <span>zł</span>
             </div>
-        </a>
+<!--        </a>-->
     </header>
 </body>
 </html>

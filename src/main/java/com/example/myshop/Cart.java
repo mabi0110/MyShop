@@ -10,6 +10,7 @@ import org.thymeleaf.templateparser.ITemplateParser;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -21,47 +22,37 @@ public class Cart {
     private BigDecimal sum = BigDecimal.ZERO;
 
     public void addItem(Item item) {
-        boolean notFound = true;
-
-        for (CartItem cartItem : cartItems) {
-            if (cartItem.getItem().getId().equals(item.getId())) {
-                notFound = false;
-                cartItem.increaseCounter();
-                recalculatePriceAndCounter();
-                break;
-            }
-        }
-
-        if (notFound) {
-            cartItems.add(new CartItem(item));
-            recalculatePriceAndCounter();
-        }
+        getCartItemByItem(item).ifPresentOrElse(
+                CartItem::increaseCounter,
+                () -> cartItems.add(new CartItem(item))
+        );
+        recalculatePriceAndCounter();
     }
 
     public void removeItem(Item item) {
-        for (CartItem cartItem : cartItems) {
-            if (cartItem.getItem().getId().equals(item.getId())) {
-                cartItem.decreaseCounter();
-                if (cartItem.hasZeroItems()) {
-                    cartItems.remove(cartItem);
-                }
-                recalculatePriceAndCounter();
-                break;
+        Optional<CartItem> optionalCartItem = getCartItemByItem(item);
+        if (optionalCartItem.isPresent()) {
+            CartItem cartItem = optionalCartItem.get();
+            cartItem.decreaseCounter();
+            if (cartItem.hasZeroItems()) {
+                cartItems.removeIf(i -> i.idEquals(item));
             }
         }
+        recalculatePriceAndCounter();
     }
 
     private void recalculatePriceAndCounter() {
-        int tempCounter = 0;
-        BigDecimal temPrice = BigDecimal.ZERO;
+        sum = cartItems.stream().map(CartItem::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        for (CartItem cartItem : cartItems) {
-            tempCounter += cartItem.getCounter();
-            temPrice = temPrice.add(cartItem.getPrice());
-        }
+        counter = cartItems.stream().mapToInt(CartItem::getCounter)
+                .reduce(0, Integer::sum);
 
-        this.counter = tempCounter;
-        this.sum = temPrice;
+    }
 
+    private Optional<CartItem> getCartItemByItem(Item item) {
+        return cartItems.stream()
+                .filter(i -> i.idEquals(item))
+                .findFirst();
     }
 }
