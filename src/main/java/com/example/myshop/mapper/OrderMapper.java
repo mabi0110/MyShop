@@ -14,8 +14,8 @@ public class OrderMapper {
 
     public static Order mapToOrder(OrderDto orderDto){
         return Order.builder()
-                .firstname(orderDto.getFirstname())
-                .lastname(orderDto.getLastname())
+                .firstName(orderDto.getFirstName())
+                .lastName(orderDto.getLastName())
                 .address(orderDto.getAddress())
                 .postCode(orderDto.getPostCode())
                 .city(orderDto.getCity())
