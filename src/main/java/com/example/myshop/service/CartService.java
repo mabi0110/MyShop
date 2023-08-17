@@ -1,6 +1,7 @@
 package com.example.myshop.service;
 
 import com.example.myshop.Cart;
+import com.example.myshop.ItemOperation;
 import com.example.myshop.model.Item;
 import com.example.myshop.repository.ItemRepository;
 import org.springframework.stereotype.Service;
@@ -23,28 +24,16 @@ public class CartService {
         return itemRepository.findAll();
     }
 
-    public void addItemToCart(Long itemId){
-
+    public void itemOperation(Long itemId, ItemOperation itemOperation){
         Optional<Item> optionalItem = itemRepository.findById(itemId);
         if (optionalItem.isPresent()){
             Item item = optionalItem.get();
-            cart.addItem(item);
-        }
-    }
-
-    public void decreaseItem(Long itemId) {
-        Optional<Item> optionalItem = itemRepository.findById(itemId);
-        if (optionalItem.isPresent()){
-            Item item = optionalItem.get();
-            cart.decreaseItem(item);
-        }
-    }
-
-    public void removeItem(Long itemId) {
-        Optional<Item> optionalItem = itemRepository.findById(itemId);
-        if (optionalItem.isPresent()){
-            Item item = optionalItem.get();
-            cart.removeAllItems(item);
+            switch (itemOperation){
+                case INCREASE -> cart.addItem(item);
+                case DECREASE -> cart.decreaseItem(item);
+                case REMOVE -> cart.removeAllItems(item);
+                default -> throw new IllegalArgumentException();
+            }
         }
     }
 }

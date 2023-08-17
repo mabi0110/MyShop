@@ -1,5 +1,6 @@
 package com.example.myshop.controller;
 
+import com.example.myshop.ItemOperation;
 import com.example.myshop.model.Item;
 import com.example.myshop.service.CartService;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 public class HomeController {
@@ -29,7 +30,7 @@ public class HomeController {
 
     @GetMapping("/add/{itemId}")
     public String addItemToCart(@PathVariable Long itemId, Model model) {
-        cartService.addItemToCart(itemId);
+        cartService.itemOperation(itemId, ItemOperation.INCREASE);
         List<Item> items = cartService.getAllItems();
         model.addAttribute("items", items);
         return "home";

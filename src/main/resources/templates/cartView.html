@@ -40,7 +40,7 @@
         </table>
 
         <div class="summary">
-            <p><span>Do zapłaty</span><span th:text="${@cart.sum}"></span>zł</p>
+            <p><span>Do zapłaty: </span><span th:text="${@cart.sum}"></span>zł</p>
         </div>
         <a th:href="@{/order/summary}" class="add-btn">Dalej</a>
     </div>
