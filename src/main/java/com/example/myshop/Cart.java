@@ -29,13 +29,13 @@ public class Cart {
         recalculatePriceAndCounter();
     }
 
-    public void removeItem(Item item) {
+    public void decreaseItem(Item item) {
         Optional<CartItem> optionalCartItem = getCartItemByItem(item);
         if (optionalCartItem.isPresent()) {
             CartItem cartItem = optionalCartItem.get();
             cartItem.decreaseCounter();
             if (cartItem.hasZeroItems()) {
-                cartItems.removeIf(i -> i.idEquals(item));
+                removeAllItems(item);
             }
         }
         recalculatePriceAndCounter();
@@ -54,5 +54,10 @@ public class Cart {
         return cartItems.stream()
                 .filter(i -> i.idEquals(item))
                 .findFirst();
+    }
+
+    public void removeAllItems(Item item){
+        cartItems.removeIf(i -> i.idEquals(item));
+        recalculatePriceAndCounter();
     }
 }

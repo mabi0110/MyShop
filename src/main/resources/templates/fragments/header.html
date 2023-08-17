@@ -6,9 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <header th:fragment="shopHeader">
+    <header th:fragment="ShopHeader">
         <span class="title">MyShop</span>
-<!--        <a href="" class="cart-ico">-->
+        <a th:href="@{/order/cart}" class="cart-ico">
             <div>
                 <span>Koszyk (</span>
                 <span th:text="${@cart.counter}"></span>
@@ -16,7 +16,7 @@
                 <span th:text="${@cart.sum}"></span>
                 <span>zł</span>
             </div>
-<!--        </a>-->
+        </a>
     </header>
 </body>
 </html>

@@ -2,11 +2,7 @@ body {
     margin: 0;
 }
 
-h2 {
-    color: red;
-}
-
-header {
+header{
     background-color: black;
     color: white;
     padding: 5px;
@@ -21,26 +17,28 @@ header {
 }
 
 .main-content {
-    background-color: #999999;
+    background-color: rgb(230, 230, 230);
+    margin: auto;
+    margin-top: 30px;
     width: 75%;
-    height: 500px;
-    margin: 20px auto auto;
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
-.item {
-    background-color: white;
+
+
+.item{
+    background-color: rgb(255, 255, 255);
     width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.item-name {
+.item-name{
     background-color: black;
     color: white;
     text-align: center;
@@ -51,13 +49,12 @@ header {
     margin-top: 0;
 }
 
-.item img {
-    width: 70%;
-    height: auto;
-    border: 1px solid silver;
+.item img{
+    width: 150px;
+    height: 200px;
 }
 
-.add-button {
+.add-btn{
     text-decoration: none;
     background-color: black;
     color: white;
@@ -68,15 +65,67 @@ header {
     margin-bottom: 10px;
 }
 
-.add-button:hover {
-    background-color: #2f2f2f;
+.add-btn:hover {
+    background-color: rgb(88, 88, 88);
 }
 
-.cart-ico {
+.cart-ico{
     text-decoration: none;
     color: white;
 }
 
-.cart-ico:hover {
+.cart-ico:hover{
     color: brown;
+}
+
+table, tr {
+    width: 80%;
+    border: 1px solid black;
+}
+
+th{
+    text-align: left;
+    border: 1px solid black;;
+}
+
+td img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.mbtn{
+    background-color: blanchedalmond;
+    text-decoration: none;
+    display: block;
+    width: 30px;
+    height: 25px;
+    text-align: center;
+    border-radius: 5px;
+    padding-top: 5px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+td p{
+    margin: 3px;
+    padding: 5px
+}
+
+form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form label{
+    width: 100%;
+}
+
+.infoMsg{
+    width: 100%;
+    color: green;
+    font-size: 1.3rem;
+    text-align: center;
 }
