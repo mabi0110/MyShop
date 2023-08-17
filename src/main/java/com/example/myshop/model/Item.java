@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 public class Item {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     private Long id;
     private String name;
     private BigDecimal price;

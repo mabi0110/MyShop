@@ -2,16 +2,13 @@ package com.example.myshop.controller;
 
 import com.example.myshop.ItemOperation;
 import com.example.myshop.dto.OrderDto;
-import com.example.myshop.model.Item;
 import com.example.myshop.service.CartService;
+import com.example.myshop.service.OrderService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/order")
@@ -19,8 +16,11 @@ public class OrderController {
 
     private final CartService cartService;
 
-    public OrderController(CartService cartService) {
+    private final OrderService orderService;
+
+    public OrderController(CartService cartService, OrderService orderService) {
         this.cartService = cartService;
+        this.orderService = orderService;
     }
 
     @GetMapping("/cart")
@@ -53,6 +53,8 @@ public class OrderController {
 
     @PostMapping("/saveorder")
     public String saveOrder(OrderDto orderDto){
+        orderService.saveOrder(orderDto);
+
         return "redirect:/";
     }
 }

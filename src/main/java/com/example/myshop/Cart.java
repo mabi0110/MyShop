@@ -60,4 +60,11 @@ public class Cart {
         cartItems.removeIf(i -> i.idEquals(item));
         recalculatePriceAndCounter();
     }
+
+
+    public void clearCart(){
+        cartItems.clear();
+        counter = 0;
+        sum = BigDecimal.ZERO;
+    }
 }
