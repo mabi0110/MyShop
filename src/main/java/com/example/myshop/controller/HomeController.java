@@ -1,5 +1,6 @@
 package com.example.myshop.controller;
 
+import com.example.myshop.Cart;
 import com.example.myshop.model.Item;
 import com.example.myshop.repository.ItemRepository;
 import jakarta.servlet.http.HttpSession;
@@ -16,10 +17,13 @@ import java.util.Optional;
 public class HomeController {
 
     private final ItemRepository itemRepository;
+    private final Cart cart;
 
-    public HomeController(ItemRepository itemRepository) {
+    public HomeController(ItemRepository itemRepository, Cart cart) {
         this.itemRepository = itemRepository;
+        this.cart = cart;
     }
+
 
     @GetMapping("/")
     public String home(Model model) {
@@ -29,18 +33,12 @@ public class HomeController {
     }
 
     @GetMapping("/add/{itemId}")
-    public String addItemToCart(@PathVariable Long itemId, Model model, HttpSession session) {
-        @SuppressWarnings("uncheked")
-        List<Item> cart = (List<Item>)session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ArrayList<>();
-        }
+    public String addItemToCart(@PathVariable Long itemId, Model model) {
 
         Optional<Item> optionalItem = itemRepository.findById(itemId);
         if (optionalItem.isPresent()){
             Item item = optionalItem.get();
-            cart.add(item);
-            session.setAttribute("cart", cart);
+            cart.addItem(item);
         }
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
