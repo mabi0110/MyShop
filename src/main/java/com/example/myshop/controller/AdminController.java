@@ -20,7 +20,7 @@ public class AdminController {
 
     @GetMapping
     private String adminPage() {
-        return "adminview/adminPage";
+        return "adminview/addItem";
     }
 
     @PostMapping
